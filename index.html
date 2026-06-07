@@ -184,6 +184,37 @@ color:black;
     transform:translateY(-2px);
 }
 
+#scrollTopBtn,
+#scrollBottomBtn{
+    position:fixed;
+    right:20px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
+    background:#2563eb;
+    color:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    z-index:999;
+    transition:0.3s;
+}
+
+#scrollTopBtn{
+    bottom:90px;
+    display:none;
+}
+
+#scrollBottomBtn{
+    bottom:20px;
+}
+
+#scrollTopBtn:hover,
+#scrollBottomBtn:hover{
+    transform:scale(1.1);
+}
+
 @media(max-width:768px){
 .hero h1{font-size:2.2rem}
 nav{justify-content:center}
@@ -303,7 +334,8 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 <footer>
 <p>© 2026 Keshavarapu Sathish Kumar | Java Developer</p>
 </footer>
-
+<button id="scrollTopBtn" title="Go to Top">⬆️</button>
+<button id="scrollBottomBtn" title="Go to Bottom">⬇️</button>
 <script>
 const observer = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
@@ -334,6 +366,38 @@ localStorage.setItem("theme","dark");
 toggleButton.innerHTML="🌙 Dark Mode";
 localStorage.setItem("theme","light");
 }
+});
+
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+
+window.addEventListener("scroll", () => {
+
+    if (window.pageYOffset > 300) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+        scrollBottomBtn.style.display = "none";
+    } else {
+        scrollBottomBtn.style.display = "block";
+    }
+});
+
+scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+scrollBottomBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
 });
 </script>
 
