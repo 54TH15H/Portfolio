@@ -615,7 +615,9 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 
 <script>
 
+// ======================
 // Fade Animation
+// ======================
 const fadeObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if(entry.isIntersecting){
@@ -624,11 +626,14 @@ const fadeObserver = new IntersectionObserver(entries => {
     });
 });
 
-document.querySelectorAll(".fade")
-    .forEach(el => fadeObserver.observe(el));
+document.querySelectorAll(".fade").forEach(el => {
+    fadeObserver.observe(el);
+});
 
 
+// ======================
 // Theme Toggle
+// ======================
 const toggleButton =
     document.getElementById("themeToggle");
 
@@ -656,7 +661,9 @@ toggleButton.addEventListener("click", () => {
 });
 
 
+// ======================
 // Scroll Buttons
+// ======================
 const scrollTopBtn =
     document.getElementById("scrollTopBtn");
 
@@ -701,69 +708,115 @@ scrollBottomBtn.addEventListener("click", () => {
 });
 
 
-// Active Navigation Highlight
+// ======================
+// Active Navigation
+// ======================
+const sections =
+    document.querySelectorAll("section");
+
 const navLinks =
     document.querySelectorAll(".nav-link");
 
 const navContainer =
     document.querySelector("nav ul");
 
-const sectionObserver =
-new IntersectionObserver((entries) => {
+function updateActiveNav() {
 
-    entries.forEach(entry => {
+    let currentSection = "home";
 
-        if(entry.isIntersecting){
+    const headerHeight =
+        document.querySelector("header").offsetHeight;
 
-            navLinks.forEach(link => {
-                link.classList.remove("active");
-            });
+    sections.forEach(section => {
 
-            const activeLink =
-                document.querySelector(
-                    `a[href="#${entry.target.id}"]`
-                );
+        const sectionTop =
+            section.offsetTop - headerHeight - 120;
 
-            if(activeLink){
+        const sectionBottom =
+            sectionTop + section.offsetHeight;
 
-                activeLink.classList.add("active");
-
-                // Mobile Auto Horizontal Scroll
-                if(window.innerWidth <= 768){
-
-                    const left =
-                        activeLink.offsetLeft -
-                        navContainer.clientWidth / 2 +
-                        activeLink.clientWidth / 2;
-
-                    navContainer.scrollTo({
-                        left,
-                        behavior: "smooth"
-                    });
-                }
-            }
+        if(
+            window.scrollY >= sectionTop &&
+            window.scrollY < sectionBottom
+        ){
+            currentSection = section.id;
         }
 
     });
 
-},{
-    threshold: 0.55
-});
+    // Special case for bottom of page
+    if(
+        window.innerHeight + window.scrollY >=
+        document.body.scrollHeight - 50
+    ){
+        currentSection = "contact";
+    }
 
-document
-    .querySelectorAll("section")
-    .forEach(section =>
-        sectionObserver.observe(section)
-    );
+    navLinks.forEach(link => {
 
+        link.classList.remove("active");
 
-// Initial Active Tab
+        if(
+            link.getAttribute("href") ===
+            "#" + currentSection
+        ){
+
+            link.classList.add("active");
+
+            // Mobile horizontal auto-scroll
+            if(window.innerWidth <= 768){
+
+                const left =
+                    link.offsetLeft -
+                    (navContainer.clientWidth / 2) +
+                    (link.clientWidth / 2);
+
+                navContainer.scrollTo({
+                    left: left,
+                    behavior: "smooth"
+                });
+
+            }
+        }
+    });
+}
+
+window.addEventListener("scroll", updateActiveNav);
+
 window.addEventListener("load", () => {
 
-    const homeLink =
-        document.querySelector('a[href="#home"]');
+    updateActiveNav();
 
-    homeLink.classList.add("active");
+});
+
+
+// ======================
+// Nav Click Fix
+// ======================
+navLinks.forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navLinks.forEach(l =>
+            l.classList.remove("active")
+        );
+
+        link.classList.add("active");
+
+        if(window.innerWidth <= 768){
+
+            const left =
+                link.offsetLeft -
+                (navContainer.clientWidth / 2) +
+                (link.clientWidth / 2);
+
+            navContainer.scrollTo({
+                left: left,
+                behavior: "smooth"
+            });
+
+        }
+    });
 
 });
 
