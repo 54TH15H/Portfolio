@@ -242,6 +242,47 @@ color:black;
 .hero h1{font-size:2.2rem}
 nav{justify-content:center}
 }
+
+@media (max-width: 768px) {
+
+    nav{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    nav ul{
+        display:flex;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        width:100%;
+        gap:12px;
+
+        scrollbar-width:none;
+    }
+
+    nav ul::-webkit-scrollbar{
+        display:none;
+    }
+
+    nav li{
+        flex-shrink:0;
+    }
+
+    .nav-link{
+        white-space:nowrap;
+    }
+
+    .theme-btn{
+        margin-top:15px;
+        align-self:center;
+    }
+}
+
+.logo{
+    font-size:1.8rem;
+    font-weight:bold;
+    line-height:1.2;
+}
 </style>
 </head>
 <body class="light-theme">
