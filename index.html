@@ -163,6 +163,11 @@ background:white;
 color:black;
 }
 
+.dark-theme .nav-link.active{
+    background:#60a5fa;
+    color:#0f172a;
+}
+
 .contact-links{
     display:flex;
     justify-content:center;
@@ -215,6 +220,24 @@ color:black;
     transform:scale(1.1);
 }
 
+.nav-link{
+    color:white;
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:6px;
+    transition:0.3s;
+}
+
+.nav-link:hover{
+    background:rgba(255,255,255,0.15);
+}
+
+.nav-link.active{
+    background:white;
+    color:#2563eb;
+    font-weight:bold;
+}
+
 @media(max-width:768px){
 .hero h1{font-size:2.2rem}
 nav{justify-content:center}
@@ -228,18 +251,20 @@ nav{justify-content:center}
 <div class="logo">Keshavarapu Sathish Kumar</div>
 
 <ul>
-<li><a href="#about">About</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#experience">Experience</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#contact">Contact</a></li>
+<li><a href="#home" class="nav-link">Home</a></li>
+<li><a href="#about" class="nav-link">About</a></li>
+<li><a href="#skills" class="nav-link">Skills</a></li>
+<li><a href="#experience" class="nav-link">Experience</a></li>
+<li><a href="#projects" class="nav-link" >Projects</a></li>
+<li><a href="#contact" class="nav-link"
+>Contact</a></li>
 </ul>
 
 <button id="themeToggle" class="theme-btn">🌙 Dark Mode</button>
 </nav>
 </header>
 
-<section class="hero">
+<section class="hero" id="home">
 <div>
 <h1>Keshavarapu Sathish Kumar</h1>
 <h2>Java Backend Developer</h2>
@@ -397,6 +422,33 @@ scrollBottomBtn.addEventListener("click", () => {
     window.scrollTo({
         top: document.body.scrollHeight,
         behavior: "smooth"
+    });
+});
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-link");
+
+window.addEventListener("scroll", () => {
+
+    let current = "";
+
+    sections.forEach(section => {
+
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.clientHeight;
+
+        if(window.scrollY >= sectionTop){
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href") === "#" + current){
+            link.classList.add("active");
+        }
     });
 });
 </script>
