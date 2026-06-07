@@ -323,6 +323,17 @@ html{
     scroll-behavior:smooth;
 }
 
+.logo{
+    font-size:1.8rem;
+    font-weight:bold;
+    line-height:1.2;
+}
+.tagline{
+    color:#64748b;
+    margin:15px 0;
+    font-size:1rem;
+    font-weight:600;
+}
 @media (max-width: 768px) {
 
     section{
@@ -367,17 +378,12 @@ html{
     }
 
     .logo{
-        font-size:1.3rem;
-        max-width:180px;
+        font-size:1.2rem;
+        max-width:160px;
         line-height:1.2;
     }
 }
 
-.logo{
-    font-size:1.8rem;
-    font-weight:bold;
-    line-height:1.2;
-}
 </style>
 </head>
 <body class="light-theme">
@@ -406,6 +412,9 @@ html{
 <section class="hero" id="home">
 <div>
 <h1>Keshavarapu Sathish Kumar</h1>
+<p class="tagline">
+Java 17 • Spring Boot • Microservices • Oracle • IBM MQ
+</p>
 <h2>Java Backend Developer</h2>
 <p>
 Software Engineer with 3.7+ years of experience in Java, Spring Boot,
@@ -605,15 +614,22 @@ window.addEventListener("scroll", () => {
 
         // Auto-scroll active nav item into view
         if(window.innerWidth <= 768){
-    link.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest"
-    });
+    const navContainer = document.querySelector("nav ul");
+
+const left =
+    link.offsetLeft -
+    navContainer.clientWidth / 2 +
+    link.clientWidth / 2;
+
+navContainer.scrollTo({
+    left,
+    behavior: "smooth"
+});
 }
     }
 });
 });
+window.dispatchEvent(new Event("scroll"));
 </script>
 
 </body>
