@@ -31,10 +31,18 @@ flex-wrap:wrap;
 .logo{font-size:1.5rem;font-weight:bold}
 
 nav ul{
-list-style:none;
-display:flex;
-gap:20px;
-flex-wrap:wrap;
+    display:flex;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    scrollbar-width:none;
+}
+
+nav ul::-webkit-scrollbar{
+    display:none;
+}
+
+nav li{
+    flex-shrink:0;
 }
 
 nav a{color:white;text-decoration:none}
@@ -485,6 +493,17 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 <button id="scrollTopBtn" title="Go to Top">⬆️</button>
 <button id="scrollBottomBtn" title="Go to Bottom">⬇️</button>
 <script>
+
+if(window.innerWidth <= 768){
+
+    link.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+    });
+
+}
+
 const observer = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){entry.target.classList.add('show');}
@@ -567,12 +586,20 @@ window.addEventListener("scroll", () => {
 
     navLinks.forEach(link => {
 
-        link.classList.remove("active");
+    link.classList.remove("active");
 
-        if(link.getAttribute("href") === "#" + current){
-            link.classList.add("active");
-        }
-    });
+    if(link.getAttribute("href") === "#" + current){
+
+        link.classList.add("active");
+
+        // Auto-scroll active nav item into view
+        link.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest"
+        });
+    }
+});
 });
 </script>
 
