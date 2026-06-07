@@ -414,6 +414,7 @@ html{
         gap:12px;
 
         scrollbar-width:none;
+        scroll-behavior:smooth;
     }
 
     nav ul::-webkit-scrollbar{
@@ -612,6 +613,9 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
         Java Backend Developer | Spring Boot | Microservices
     </p>
 </footer>
+<button id="scrollTopBtn">⬆️</button>
+<button id="scrollBottomBtn">⬇️</button>
+
 
 <script>
 
@@ -667,6 +671,8 @@ toggleButton.addEventListener("click", () => {
 const scrollTopBtn =
     document.getElementById("scrollTopBtn");
 
+
+
 const scrollBottomBtn =
     document.getElementById("scrollBottomBtn");
 
@@ -689,23 +695,23 @@ window.addEventListener("scroll", () => {
 
 });
 
-scrollTopBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+if(scrollTopBtn){
+    scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     });
+}
 
-});
-
-scrollBottomBtn.addEventListener("click", () => {
-
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
+if(scrollBottomBtn){
+    scrollBottomBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
     });
-
-});
+}
 
 
 // ======================
