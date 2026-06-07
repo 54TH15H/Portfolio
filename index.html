@@ -175,13 +175,48 @@ color:black;
     gap:15px;
 }
 
-.contact-btn{
-    width:220px;
+.contact{
+    padding:80px 20px;
     text-align:center;
 }
 
+.contact-text{
+    max-width:500px;
+    margin:20px auto 35px;
+    line-height:1.7;
+    opacity:0.9;
+}
+
+.contact-links{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+}
+
+.contact-btn{
+    width:240px;
+    padding:15px;
+
+    text-decoration:none;
+    color:white;
+
+    background:#2563eb;
+
+    border-radius:12px;
+
+    font-size:18px;
+    font-weight:600;
+
+    transition:0.3s;
+}
+
 .contact-btn:hover{
-    transform:translateY(-2px);
+    transform:translateY(-3px);
+}
+
+.dark-theme .contact-btn{
+    background:#3b82f6;
 }
 
 #scrollTopBtn,
@@ -412,24 +447,37 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 </div>
 </div>
 </section>
+
 <section id="contact" class="contact fade">
-<h2 class="section-title">Contact</h2>
-<div class="contact-links">
-    <a href="mailto:sathish.keshavarapu@gmail.com" class="contact-btn">
-        📧 Email Me
-    </a>
 
-    <a href="https://www.linkedin.com/in/sathishkeshavarapu"
-       target="_blank"
-       class="contact-btn">
-       💼 LinkedIn
-    </a>
+    <h2 class="section-title">Let's Connect</h2>
 
-    <a href="https://github.com/54TH15H"
-       target="_blank"
-       class="contact-btn">
-       💻 GitHub
-    </a>
+    <p class="contact-text">
+        Feel free to reach out for opportunities,
+        collaborations, or just a friendly conversation.
+    </p>
+
+    <div class="contact-links">
+
+        <a href="mailto:sathish.keshavarapu@gmail.com"
+           class="contact-btn">
+            📧 Email Me
+        </a>
+
+        <a href="https://www.linkedin.com/in/sathishkeshavarapu"
+           target="_blank"
+           class="contact-btn">
+            💼 LinkedIn
+        </a>
+
+        <a href="https://github.com/54TH15H"
+           target="_blank"
+           class="contact-btn">
+            💻 GitHub
+        </a>
+
+    </div>
+
 </section>
 <footer>
 <p>© 2026 Keshavarapu Sathish Kumar | Java Developer</p>
