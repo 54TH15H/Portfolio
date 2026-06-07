@@ -163,6 +163,27 @@ background:white;
 color:black;
 }
 
+.contact-links{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.contact-btn{
+    background:#2563eb;
+    color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    transform:translateY(-2px);
+}
+
 @media(max-width:768px){
 .hero h1{font-size:2.2rem}
 nav{justify-content:center}
@@ -259,14 +280,24 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 <p>Designed secure and scalable Spring Boot REST APIs.</p>
 </div>
 </div>
-</section>
 
-<section id="contact" class="contact fade">
-<h2 class="section-title">Contact</h2>
-<p>Email: sathish.keshavarapu@gmail.com</p>
-<p>LinkedIn: https://www.linkedin.com/in/sathishkeshavarapu</p>
-<p>GitHub: https://github.com/54TH15H</p>
-</section>
+<div class="contact-links">
+    <a href="mailto:sathish.keshavarapu@gmail.com" class="contact-btn">
+        📧 Email Me
+    </a>
+
+    <a href="https://www.linkedin.com/in/sathishkeshavarapu"
+       target="_blank"
+       class="contact-btn">
+       💼 LinkedIn
+    </a>
+
+    <a href="https://github.com/54TH15H"
+       target="_blank"
+       class="contact-btn">
+       💻 GitHub
+    </a>
+</div>
 
 <footer>
 <p>© 2026 Keshavarapu Sathish Kumar | Java Developer</p>
