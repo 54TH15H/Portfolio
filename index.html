@@ -83,7 +83,7 @@ border-radius:8px;
 section{
 padding:70px 8%;
 padding-top:100px;
-scroll-margin-top: 160px;
+scroll-margin-top: 180px;
 }
 
 .section-title{
@@ -382,7 +382,7 @@ html{
 @media (max-width: 768px) {
 
     section{
-        scroll-margin-top: 150px;
+        scroll-margin-top: 220px;
     }
 
    .profile-img{
@@ -613,132 +613,160 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
     </p>
 </footer>
 
-<button id="scrollTopBtn" title="Go to Top">⬆️</button>
-<button id="scrollBottomBtn" title="Go to Bottom">⬇️</button>
 <script>
 
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){entry.target.classList.add('show');}
+// Fade Animation
+const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
 });
-});
 
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+document.querySelectorAll(".fade")
+    .forEach(el => fadeObserver.observe(el));
 
-const toggleButton=document.getElementById("themeToggle");
 
-const savedTheme=localStorage.getItem("theme");
+// Theme Toggle
+const toggleButton =
+    document.getElementById("themeToggle");
 
-if(savedTheme==="dark"){
-document.body.classList.remove("light-theme");
-document.body.classList.add("dark-theme");
-toggleButton.innerHTML="☀️";
+const savedTheme =
+    localStorage.getItem("theme");
+
+if(savedTheme === "dark"){
+    document.body.classList.remove("light-theme");
+    document.body.classList.add("dark-theme");
+    toggleButton.innerHTML = "☀️";
 }
 
-toggleButton.addEventListener("click",()=>{
-document.body.classList.toggle("dark-theme");
-document.body.classList.toggle("light-theme");
+toggleButton.addEventListener("click", () => {
 
-if(document.body.classList.contains("dark-theme")){
-toggleButton.innerHTML="☀️";
-localStorage.setItem("theme","dark");
-}else{
-toggleButton.innerHTML="🌙";
-localStorage.setItem("theme","light");
-}
+    document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("light-theme");
+
+    if(document.body.classList.contains("dark-theme")){
+        toggleButton.innerHTML = "☀️";
+        localStorage.setItem("theme","dark");
+    }else{
+        toggleButton.innerHTML = "🌙";
+        localStorage.setItem("theme","light");
+    }
 });
 
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-const scrollBottomBtn = document.getElementById("scrollBottomBtn");
+
+// Scroll Buttons
+const scrollTopBtn =
+    document.getElementById("scrollTopBtn");
+
+const scrollBottomBtn =
+    document.getElementById("scrollBottomBtn");
 
 window.addEventListener("scroll", () => {
 
-    if (window.pageYOffset > 300) {
+    if(window.scrollY > 300){
         scrollTopBtn.style.display = "block";
-    } else {
+    }else{
         scrollTopBtn.style.display = "none";
     }
 
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300){
+    if(
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 300
+    ){
         scrollBottomBtn.style.display = "none";
-    } else {
+    }else{
         scrollBottomBtn.style.display = "block";
     }
+
 });
 
 scrollTopBtn.addEventListener("click", () => {
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
+
 });
 
 scrollBottomBtn.addEventListener("click", () => {
+
     window.scrollTo({
         top: document.body.scrollHeight,
         behavior: "smooth"
     });
+
 });
 
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".nav-link");
 
-window.addEventListener("scroll", () => {
+// Active Navigation Highlight
+const navLinks =
+    document.querySelectorAll(".nav-link");
 
-    const headerHeight =
-        document.querySelector("header").offsetHeight;
+const navContainer =
+    document.querySelector("nav ul");
 
-    let current = "";
+const sectionObserver =
+new IntersectionObserver((entries) => {
 
-    sections.forEach(section => {
+    entries.forEach(entry => {
 
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
+        if(entry.isIntersecting){
 
-        if (
-            window.scrollY >= sectionTop - headerHeight - 20 &&
-            window.scrollY < sectionTop + sectionHeight - headerHeight - 20
-        ) {
-            current = section.getAttribute("id");
-        }
-    });
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+            });
 
-    if(window.scrollY < 100){
-        current = "home";
-    }
+            const activeLink =
+                document.querySelector(
+                    `a[href="#${entry.target.id}"]`
+                );
 
-    navLinks.forEach(link => {
+            if(activeLink){
 
-        link.classList.remove("active");
+                activeLink.classList.add("active");
 
-        if(link.getAttribute("href") === "#" + current){
+                // Mobile Auto Horizontal Scroll
+                if(window.innerWidth <= 768){
 
-            link.classList.add("active");
+                    const left =
+                        activeLink.offsetLeft -
+                        navContainer.clientWidth / 2 +
+                        activeLink.clientWidth / 2;
 
-            if(window.innerWidth <= 768){
-
-                const navContainer =
-                    document.querySelector("nav ul");
-
-                const left =
-                    link.offsetLeft -
-                    navContainer.clientWidth / 2 +
-                    link.clientWidth / 2;
-
-                navContainer.scrollTo({
-                    left,
-                    behavior:"smooth"
-                });
+                    navContainer.scrollTo({
+                        left,
+                        behavior: "smooth"
+                    });
+                }
             }
         }
+
     });
 
-    // Hide down arrow on last section
-    if(current === "contact"){
-        scrollBottomBtn.style.display = "none";
-    }
+},{
+    threshold: 0.55
 });
-window.dispatchEvent(new Event("scroll"));
+
+document
+    .querySelectorAll("section")
+    .forEach(section =>
+        sectionObserver.observe(section)
+    );
+
+
+// Initial Active Tab
+window.addEventListener("load", () => {
+
+    const homeLink =
+        document.querySelector('a[href="#home"]');
+
+    homeLink.classList.add("active");
+
+});
+
 </script>
 
 </body>
