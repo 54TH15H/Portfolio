@@ -83,7 +83,7 @@ border-radius:8px;
 section{
 padding:70px 8%;
 padding-top:100px;
-scroll-margin-top: 200px;
+scroll-margin-top: 160px;
 }
 
 .section-title{
@@ -382,7 +382,7 @@ html{
 @media (max-width: 768px) {
 
     section{
-        scroll-margin-top: 280px;
+        scroll-margin-top: 150px;
     }
 
    .profile-img{
@@ -685,7 +685,12 @@ window.addEventListener("scroll", () => {
 
     sections.forEach(section => {
 
-        const sectionTop = section.offsetTop - 250;
+        const headerHeight =
+    document.querySelector("header").offsetHeight;
+
+const sectionTop =
+    section.offsetTop - headerHeight - 20;
+
         const sectionHeight = section.clientHeight;
 
         if(window.scrollY >= sectionTop){
