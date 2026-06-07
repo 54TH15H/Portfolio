@@ -238,6 +238,31 @@ color:black;
     font-weight:bold;
 }
 
+.theme-btn{
+    position:absolute;
+    top:20px;
+    right:20px;
+
+    padding:8px 14px;
+    font-size:14px;
+    font-weight:600;
+
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+
+    background:white;
+    color:#0f172a;
+
+    transition:0.3s;
+}
+
+.theme-btn:hover{
+    transform:scale(1.05);
+}
+
+
+
 @media(max-width:768px){
 .hero h1{font-size:2.2rem}
 nav{justify-content:center}
@@ -272,9 +297,16 @@ nav{justify-content:center}
         white-space:nowrap;
     }
 
-    .theme-btn{
-        margin-top:15px;
-        align-self:center;
+  .theme-btn{
+        top:15px;
+        right:15px;
+        padding:6px 12px;
+        font-size:13px;
+    }
+
+    .logo{
+        max-width:70%;
+        font-size:1.7rem;
     }
 }
 
