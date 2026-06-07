@@ -505,16 +505,6 @@ Oracle databases, and enterprise integrations. Passionate about building scalabl
 <button id="scrollBottomBtn" title="Go to Bottom">⬇️</button>
 <script>
 
-if(window.innerWidth <= 768){
-
-    link.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest"
-    });
-
-}
-
 const observer = new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){entry.target.classList.add('show');}
@@ -557,7 +547,7 @@ window.addEventListener("scroll", () => {
         scrollTopBtn.style.display = "none";
     }
 
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 300){
         scrollBottomBtn.style.display = "none";
     } else {
         scrollBottomBtn.style.display = "block";
@@ -583,11 +573,11 @@ const navLinks = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
 
-    let current = "";
+    let current = "home";
 
     sections.forEach(section => {
 
-        const sectionTop = section.offsetTop - 150;
+        const sectionTop = section.offsetTop - 250;
         const sectionHeight = section.clientHeight;
 
         if(window.scrollY >= sectionTop){
@@ -604,11 +594,13 @@ window.addEventListener("scroll", () => {
         link.classList.add("active");
 
         // Auto-scroll active nav item into view
-        link.scrollIntoView({
-            behavior: "smooth",
-            inline: "center",
-            block: "nearest"
-        });
+        if(window.innerWidth <= 768){
+    link.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest"
+    });
+}
     }
 });
 });
